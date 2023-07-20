@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, KeyboardAvoidingView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Master({ navigation }) {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+     style={styles.container}
+     behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Choose the behavior based on the platform
+     >
       <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Create a Master Pass!</Text>
       <View style={styles.top}>
         <TextInput placeholder='    Create a Master Pass!' style={styles.textInput}>
@@ -20,7 +23,7 @@ function Master({ navigation }) {
       <View style={styles.button}>
         <Button title='Save and Continue!' onPress={() => navigation.navigate('Login')} color="#841FFF" />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -107,6 +110,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     borderLeftRadius: 20,
     borderRightRadius: 20,
+    padding: 0,
   },
   topper: {
     flex: 0.17,
