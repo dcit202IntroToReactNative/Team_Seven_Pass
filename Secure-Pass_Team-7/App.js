@@ -11,7 +11,7 @@ function Master({ navigation }) {
      >
       <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Create a Master Pass!</Text>
       <View style={styles.top}>
-        <TextInput placeholder='    Create a Master Pass!' style={styles.textInput}>
+        <TextInput placeholder='    Create Master Pass!' style={styles.textInput}>
           <StatusBar style="auto" />
         </TextInput>
       </View>
@@ -27,8 +27,9 @@ function Master({ navigation }) {
   );
 }
 
-function Login() {
+function Login({navigation}) {
   return (
+
     <View style={styles.container}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom:50 }}>Login Here!</Text>
       <View style={styles.topper}>
@@ -37,11 +38,63 @@ function Login() {
         </TextInput>
       </View>
       <View style={styles.buttonTopper}>
-        <Button title='HeyClickMe!' onPress={() => Alert.alert('Bruh')} color="#841FFF" />
+       <Button title='HeyClickMe!' onPress={() => navigation.navigate('SaveDetail')} color="#841FFF" />
       </View>
     </View>
   );
 }
+
+function SaveDetail({navigation}) {
+  return (
+    <View style={styles.container}>
+      
+      <View style={styles.topper}>
+        <TextInput placeholder='  Title' style={styles.textInput}>
+          <StatusBar style="auto" />
+        </TextInput>
+      </View>
+      <View style={styles.topper}>
+        <TextInput placeholder='  Account name' style={styles.textInput}>
+          <StatusBar style="auto" />
+        </TextInput>
+      </View>
+      <View style={styles.topper}>
+        <TextInput placeholder='  Username' style={styles.textInput}>
+          <StatusBar style="auto" />
+        </TextInput>
+      </View>
+      <View style={styles.topper}>
+        <TextInput placeholder='  Password' style={styles.textInput}>
+          <StatusBar style="auto" />
+        </TextInput>
+      </View>
+      <View style={styles.buttonTopper}>
+       <Button title='Save' onPress={() => Alert.alert('Password saved')} color="#841FFF" />
+      </View>
+      <View style={styles.buttonTopper}>
+        <Button title='Details' onPress={() =>  navigation.navigate('ChangeMaster')} color="#841FFF"/>
+      </View>
+    </View>
+  );
+}
+
+
+function ChangeMaster() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom:50 }}>Change Master Password</Text>
+      <View style={styles.topper}>
+        <TextInput placeholder='    Enter new Master Pass!' style={styles.textInput}>
+          <StatusBar style="auto" />
+        </TextInput>
+      </View>
+      <View style={styles.buttonTopper}>
+        <Button title='Save' onPress={() => Alert.alert('Password saved')} color="#841FFF" />
+      </View>
+    </View>
+  );
+}
+
 
 const Stack = createNativeStackNavigator();
 
@@ -51,10 +104,15 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Master} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SaveDetail" component={SaveDetail} />
+        <Stack.Screen name="ChangeMaster" component={ChangeMaster} />
       </Stack.Navigator>
     </NavigationContainer>
+
   );
 }
+
+
 
 export default App;
 
