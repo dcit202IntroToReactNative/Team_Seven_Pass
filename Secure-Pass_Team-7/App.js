@@ -47,7 +47,7 @@ function Login({ navigation }) {
     </View>
   );
 }
-function CreateAccount() {
+function CreateAccount({navigation}) {
   const [tx1, setTx1] = useState('');
   const [tx2, setTx2] = useState('');
   const [tx3, setTx3] = useState('');
@@ -146,13 +146,52 @@ const barf =()=> "Heyya!";
         />
       </View>
       <View style={styles.buttonContainer}>
-  
+      <View style={styles.buttonTopper}>
+        <Button title='Save' onPress = {() => navigation.navigate("SaveAccount")} color="#841FFF" />
+      </View>
 </View>
 
       {/* Add Spinner component for the dropdown and handle its selection */}
     </ScrollView>
+
   );
 }
+
+function SaveAccount() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>Enter account details</Text>
+      <View style={styles.topper}>
+        <TextInput
+          placeholder=' title... '
+          style={styles.textInput}
+        />
+      </View>
+      <View style={styles.topper}>
+        <TextInput
+          placeholder=' account name... '
+          style={styles.textInput}
+        />
+      </View>
+      <View style={styles.topper}>
+        <TextInput
+          placeholder=' username... '
+          style={styles.textInput}
+        />
+      </View>
+      <View style={styles.topper}>
+        <TextInput
+          placeholder=' password... '
+          style={styles.textInput}
+        />
+      </View>
+      <View style={styles.buttonTopper}>
+        <Button title='Save' color="#841FFF" />
+      </View>
+    </View>
+  );
+}
+
 
 const Stack = createNativeStackNavigator();
 
@@ -163,6 +202,7 @@ function App() {
         <Stack.Screen name="Home" component={Master} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="CreateAccount" component={CreateAccount}/>
+        <Stack.Screen name="SaveAccount" component={SaveAccount} />
       </Stack.Navigator>
     </NavigationContainer>
   );
