@@ -146,7 +146,7 @@ const barf =()=> "Heyya!";
         />
       </View>
       <View style={styles.buttonContainer}>
-      <View style={styles.buttonTopper}>
+      <View style={styles.buttonTop}>
         <Button title='Save' onPress = {() => navigation.navigate("SaveAccount")} color="#841FFF" />
       </View>
 </View>
