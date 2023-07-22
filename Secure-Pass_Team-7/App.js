@@ -185,12 +185,13 @@ function SaveAccount() {
           style={styles.textInput}
         />
       </View>
-      <View style={styles.buttonTopper}>
+      <View style={styles.buttonTop}>
         <Button title='Save' color="#841FFF" />
       </View>
     </View>
   );
 }
+
 
 
 const Stack = createNativeStackNavigator();
@@ -233,6 +234,14 @@ const styles = StyleSheet.create({
   buttonTopper: {
     height: 40,
     width: 180,
+    marginLeft: 200,
+    marginTop: 50,
+    borderRadius: 40,
+    marginBottom:50,
+  },
+  buttonTop: {
+    height: 40,
+    width: 100,
     marginLeft: 200,
     marginTop: 50,
     borderRadius: 40,
