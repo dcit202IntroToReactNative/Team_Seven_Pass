@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, Text, View, TextInput, Button,ToastAndroid, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -158,39 +159,70 @@ const barf =()=> "Heyya!";
 }
 
 function SaveAccount({ navigation }) {
+  const [title, setTitle] = useState('');
+  const [aname, setAname] = useState('');
+  const [username, setUsername] = useState('');
+  const [pass, setPass] = useState('');
+
+  const handleSaveButtonPress = () => {
+    // Call your function here and pass the entered values as arguments
+    doi(title, aname, username, pass);
+
+    setTitle('');
+    setAname('');
+    setUsername('');
+    setPass('');
+  };
+  function doi(tit, name, user, password) {
+    // Do something with the values passed to this function
+    // For example, you can save them to AsyncStorage or perform any other operation.
+    const data={tit,name,user,password};
+    AsyncStorage.setItem("the_pass_details",JSON.stringify(data));
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>Enter account details</Text>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>
+        Enter account details
+      </Text>
       <View style={styles.topper}>
         <TextInput
           placeholder=' title... '
           style={styles.textInput}
+          value={title}
+          onChangeText={setTitle} // Update the "title" state when the text changes
         />
       </View>
       <View style={styles.topper}>
         <TextInput
           placeholder=' account name... '
           style={styles.textInput}
+          value={aname}
+          onChangeText={setAname} // Update the "aname" state when the text changes
         />
       </View>
       <View style={styles.topper}>
         <TextInput
           placeholder=' username... '
           style={styles.textInput}
+          value={username}
+          onChangeText={setUsername} // Update the "username" state when the text changes
         />
       </View>
       <View style={styles.topper}>
         <TextInput
           placeholder=' password... '
           style={styles.textInput}
+          value={pass}
+          onChangeText={setPass} // Update the "pass" state when the text changes
         />
       </View>
       <View style={styles.buttonTop}>
-        <Button title='Save' onPress ={() => navigation.navigate("ChangeMaster")} color="#841FFF" />
+        <Button title='Save' onPress={handleSaveButtonPress} color="#841FFF" />
       </View>
     </View>
   );
-}
+};
 
 
 function ChangeMaster({ navigation}) {
