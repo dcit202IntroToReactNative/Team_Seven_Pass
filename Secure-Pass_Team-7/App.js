@@ -157,7 +157,7 @@ const barf =()=> "Heyya!";
   );
 }
 
-function SaveAccount() {
+function SaveAccount({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>Enter account details</Text>
@@ -186,12 +186,35 @@ function SaveAccount() {
         />
       </View>
       <View style={styles.buttonTop}>
-        <Button title='Save' color="#841FFF" />
+        <Button title='Save' onPress ={() => navigation.navigate("ChangeMaster")} color="#841FFF" />
       </View>
     </View>
   );
 }
 
+
+function ChangeMaster() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>Change Master Password</Text>
+      <View style={styles.topper}>
+        <TextInput
+          placeholder='new passowrd..'
+          style={styles.textInput}
+        />
+      </View>
+      <View style={styles.topper}>
+        <TextInput
+          placeholder='confirm new passowrd..'
+          style={styles.textInput}
+        />
+      </View>
+      <View style={styles.buttonTop}>
+        <Button title='Save' color="#841FFF" />
+      </View>
+    </View>
+  );
+}
 
 
 const Stack = createNativeStackNavigator();
@@ -204,6 +227,7 @@ function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="CreateAccount" component={CreateAccount}/>
         <Stack.Screen name="SaveAccount" component={SaveAccount} />
+        <Stack.Screen name="ChangeMaster" component={ChangeMaster} />
       </Stack.Navigator>
     </NavigationContainer>
   );
