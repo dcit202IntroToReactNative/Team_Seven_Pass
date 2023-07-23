@@ -210,7 +210,20 @@ function ChangeMaster({ navigation}) {
         />
       </View>
       <View style={styles.buttonTop}>
-        <Button title='Save' onPress = {() => navigation.navigate("About")} color="#841FFF" />
+        <Button title='Save' color="#841FFF" />
+      </View>
+      <View style={styles.buttonTop}>
+        <Button title='Save' onPress = {() => navigation.navigate("Settings")} color="#841FFF" />
+      </View>
+    </View>
+  );
+}
+
+function Settings({ navigation}) {
+  return (
+    <View>
+      <View style={styles.buttonTop}>
+        <Button title='About' onPress = {() => navigation.navigate("About")} color="#841FFF" />
       </View>
     </View>
   );
@@ -242,6 +255,7 @@ function App() {
         <Stack.Screen name="CreateAccount" component={CreateAccount}/>
         <Stack.Screen name="SaveAccount" component={SaveAccount} />
         <Stack.Screen name="ChangeMaster" component={ChangeMaster} />
+        <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
     </NavigationContainer>
