@@ -193,7 +193,7 @@ function SaveAccount({ navigation }) {
 }
 
 
-function ChangeMaster() {
+function ChangeMaster({ navigation}) {
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>Change Master Password</Text>
@@ -210,8 +210,17 @@ function ChangeMaster() {
         />
       </View>
       <View style={styles.buttonTop}>
-        <Button title='Save' color="#841FFF" />
+        <Button title='Save' onPress = {() => navigation.navigate("About")} color="#841FFF" />
       </View>
+    </View>
+  );
+}
+
+function About() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}></Text>
+     
     </View>
   );
 }
@@ -228,6 +237,7 @@ function App() {
         <Stack.Screen name="CreateAccount" component={CreateAccount}/>
         <Stack.Screen name="SaveAccount" component={SaveAccount} />
         <Stack.Screen name="ChangeMaster" component={ChangeMaster} />
+        <Stack.Screen name="About" component={About} />
       </Stack.Navigator>
     </NavigationContainer>
   );
