@@ -219,7 +219,12 @@ function ChangeMaster({ navigation}) {
 function About() {
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}></Text>
+      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>
+      Team 7-Password Manager App Richard Djirackor (Captain) Adzedowa Courage (Second Captain)
+      This application serves as a Password Manager. It allows users to securely store their passwords and associated details such as usernames and email addresses for future use.
+      Initially this was merely a project work, but now, I will focus on building more revolutionary apps in the future
+      So watch this repository github.com/ rdjirackor, as more is certain to come, God willingly!
+      </Text>
      
     </View>
   );
