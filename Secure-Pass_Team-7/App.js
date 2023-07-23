@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, Text, View, TextInput, Button,ToastAndroid, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet,Alert, Text, View, TextInput, Button,ToastAndroid, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
 function Master({ navigation }) {
@@ -16,6 +16,8 @@ function Master({ navigation }) {
     } else {
       // Passwords match, continue to the next screen (Login)
       navigation.navigate('Login');
+      AsyncStorage.setItem("maspass",JSON.stringify(masterPass));
+    console.log(masterPass);
     }
   };
 
@@ -52,6 +54,43 @@ function Master({ navigation }) {
 }
 
 function Login({ navigation }) {
+  const [passo, setPasso] = useState('');
+  const [pass, setPass] = useState('');
+
+  useEffect(() => {
+    const getPassword = async () => {
+      try {
+        const storedPass = await AsyncStorage.getItem('maspass');
+        setPass(storedPass || ''); // If the password is null, set an empty string
+      } catch (error) {
+        // Handle errors, if any
+        console.error(error);
+      }
+    };
+  
+    getPassword();
+  }, []);
+  
+
+    
+  const handleSaveButtonPress = () => {
+    verify(passo);
+    setPasso('');
+  };
+
+  function verify(passo) {
+    if (pass === passo) {
+      navigation.navigate('CreateAccount');
+    } else {
+      ToastAndroid.show('Get Away, you brute!', ToastAndroid.LONG);
+      console.log(passo);
+      console.log(pass);
+      console.log(pass === passo);
+    }
+  }
+  
+  
+
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>Login Here!</Text>
@@ -59,10 +98,12 @@ function Login({ navigation }) {
         <TextInput
           placeholder='Enter your Master Pass!'
           style={styles.textInput}
+          value={passo.toString}
+          onChangeText={(text) => setPasso(text.toString())} 
         />
       </View>
       <View style={styles.buttonTopper}>
-        <Button title='HeyClickMe!' onPress={() => navigation.navigate("CreateAccount")} color="#841FFF" />
+        <Button title='HeyClickMe!' onPress={handleSaveButtonPress} color='#841FFF' />
       </View>
     </View>
   );
@@ -184,7 +225,6 @@ function SaveAccount({ navigation }) {
   const [pass, setPass] = useState('');
 
   const handleSaveButtonPress = () => {
-    // Call your function here and pass the entered values as arguments
     doi(title, aname, username, pass);
 
     setTitle('');
@@ -193,53 +233,54 @@ function SaveAccount({ navigation }) {
     setPass('');
   };
   function doi(tit, name, user, password) {
-    // Do something with the values passed to this function
-    // For example, you can save them to AsyncStorage or perform any other operation.
+   
     const data={tit,name,user,password};
     AsyncStorage.setItem("the_pass_details",JSON.stringify(data));
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>
+    <KeyboardAvoidingView
+     
+    style={styles.container}>
+      <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
         Enter account details
       </Text>
-      <View style={styles.topper}>
+      <View style={styles.bottom}>
         <TextInput
           placeholder=' title... '
           style={styles.textInput}
           value={title}
-          onChangeText={setTitle} // Update the "title" state when the text changes
+          onChangeText={setTitle} 
         />
       </View>
-      <View style={styles.topper}>
+      <View style={styles.bottom}>
         <TextInput
           placeholder=' account name... '
           style={styles.textInput}
           value={aname}
-          onChangeText={setAname} // Update the "aname" state when the text changes
+          onChangeText={setAname} 
         />
       </View>
-      <View style={styles.topper}>
+      <View style={styles.bottom}>
         <TextInput
           placeholder=' username... '
           style={styles.textInput}
           value={username}
-          onChangeText={setUsername} // Update the "username" state when the text changes
+          onChangeText={setUsername} 
         />
       </View>
-      <View style={styles.topper}>
+      <View style={styles.bottom}>
         <TextInput
           placeholder=' password... '
           style={styles.textInput}
           value={pass}
-          onChangeText={setPass} // Update the "pass" state when the text changes
+          onChangeText={setPass} 
         />
       </View>
       <View style={styles.buttonTop}>
         <Button title='Save' onPress={handleSaveButtonPress} color="#841FFF" />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
