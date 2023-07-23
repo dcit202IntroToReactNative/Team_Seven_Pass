@@ -6,6 +6,19 @@ import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
 function Master({ navigation }) {
+  const [masterPass, setMasterPass] = useState('');
+  const [confirmMasterPass, setConfirmMasterPass] = useState('');
+
+  const handleSaveAndContinue = () => {
+    if (masterPass !== confirmMasterPass) {
+      Alert.alert('Wrong Password', 'The passwords do not match. Please try again.');
+    } else {
+      // Passwords match, continue to the next screen (Login)
+      navigation.navigate('Login');
+    }
+  };
+
+
   return (
     <KeyboardAvoidingView
      style={styles.container}
@@ -16,16 +29,22 @@ function Master({ navigation }) {
         <TextInput
           placeholder='Create a Master Pass!'
           style={styles.textInput}
+          secureTextEntry={true}
+          value={masterPass}
+          onChangeText={setMasterPass}
         />
       </View>
       <View style={styles.bottom}>
         <TextInput
           placeholder='Confirm Master Pass!'
           style={styles.textInput}
+          secureTextEntry={true}
+          value={confirmMasterPass}
+          onChangeText={text => setConfirmMasterPass(text)}
         />
       </View>
       <View style={styles.button}>
-        <Button title='Save and Continue!' onPress={() => navigation.navigate('Login')} color="#841FFF" />
+        <Button title='Save and Continue!' onPress={handleSaveAndContinue} color="#841FFF" />
       </View>
     </KeyboardAvoidingView>
   );
