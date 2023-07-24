@@ -79,13 +79,15 @@ function Login({ navigation }) {
   };
 
   function verify(passo) {
-    if (pass === passo) {
+    if (pass == '"'+passo+'"') {
       navigation.navigate('CreateAccount');
     } else {
       ToastAndroid.show('Get Away, you brute!', ToastAndroid.LONG);
-      console.log(passo);
+      console.log(typeof(passo));
+      console.log(typeof(pass));
+      console.log('"'+passo+'"');
       console.log(pass);
-      console.log(pass === passo);
+      console.log(pass == passo);
     }
   }
   
@@ -98,8 +100,8 @@ function Login({ navigation }) {
         <TextInput
           placeholder='Enter your Master Pass!'
           style={styles.textInput}
-          value={passo.toString}
-          onChangeText={(text) => setPasso(text.toString())} 
+          value={passo}
+          onChangeText={(text) => setPasso(text)} 
         />
       </View>
       <View style={styles.buttonTopper}>
