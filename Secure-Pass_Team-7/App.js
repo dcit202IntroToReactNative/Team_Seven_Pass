@@ -112,127 +112,24 @@ function Login({ navigation }) {
   );
 }
 
-// function CreateAccount({navigation}) {
-//   const [tx1, setTx1] = useState('');
-//   const [tx2, setTx2] = useState('');
-//   const [tx3, setTx3] = useState('');
-//   const [tx4, setTx4] = useState('');
-//   const [tx5, setTx5] = useState('');
-//   const [tx6, setTx6] = useState('');
-//   const [tx7, setTx7] = useState('');
-//   const [tx8, setTx8] = useState('');
-//   const [tx9, setTx9] = useState('');
-
-//   const handleButtonPress = () => {
-//     ToastAndroid.show('HeyClickMe!', ToastAndroid.SHORT);
-//   };
-//   const [selectedValue,setSelectedValue]=useState("options1");
-// const barf =()=> "Heyya!";
-//   const handleSpinnerSelection = (selectedItem) => {
-//     switch (selectedItem) {
-//       case 'Change Master Password':
-//         // Implement the action for 'Change Master Password'
-//         break;
-//       case 'Settings':
-//         // Implement the action for 'Settings'
-//         break;
-//       case 'Exit':
-//         // Implement the action for 'Exit'
-//         break;
-//       default:
-//         break;
-//     }
-//   };
-
-//   return (
-//     <ScrollView
-//       contentContainerStyle={styles.scrollViewContent}
-//     >
-//        <View style={styles.pickerContainer}>
-//         <Picker
-//           selectedValue={selectedValue}
-//           onValueChange={(itemValue) => setSelectedValue(itemValue)}
-//         >
-//           <Picker.Item label="Option 1" value="option1" />
-//           <Picker.Item label="Option 2" value="option2" />
-//           <Picker.Item label="Option 3" value="option3" />
-//         </Picker>
-//       </View>
-//       <View style={styles.textContainer}>
-//       <TextInput
-//           style={{flex: 1,
-//             backgroundColor: '#fff',
-//             alignItems: 'center',
-//             justifyContent: 'center',
-//             width: 400,
-//           }}
-//           onChangeText={(text) => setTx1(text)}
-//           value={tx1}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx2(text)}
-//           value={tx2}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx3(text)}
-//           value={tx3}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx4(text)}
-//           value={tx4}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx5(text)}
-//           value={tx5}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx6(text)}
-//           value={tx6}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx7(text)}
-//           value={tx7}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx8(text)}
-//           value={tx8}
-//         />
-//         <TextInput
-//           style={styles.textInputCA}
-//           onChangeText={(text) => setTx9(text)}
-//           value={tx9}
-//         />
-//       </View>
-//       <View style={styles.buttonContainer}>
-//       <View style={styles.buttonTop}>
-//         <Button title='Save' onPress = {() => navigation.navigate("SaveAccount")} color="#841FFF" />
-//       </View>
-// </View>
-
-//       {/* Add Spinner component for the dropdown and handle its selection */}
-//     </ScrollView>
-
-//   );
-// }
 
 
 function CreateAccount({ navigation }) {
-const [tx1, setTx1] = useState('');
-const [tx2, setTx2] = useState('');
-const [tx3, setTx3] = useState('');
-const [tx4, setTx4] = useState('');
-const [tx5, setTx5] = useState('');
-const [tx6, setTx6] = useState('');
-const [tx7, setTx7] = useState('');
-const [tx8, setTx8] = useState('');
-const [tx9, setTx9] = useState('');
+const tx1=AsyncStorage.getItem("tx1");
+const tx2=AsyncStorage.getItem('tx2');
+const tx3=AsyncStorage.getItem('tx3');
+const tx4=AsyncStorage.getItem('tx4');
+const tx5=AsyncStorage.getItem('tx5');
+const tx6=AsyncStorage.getItem('tx6');
+const tx7=AsyncStorage.getItem('tx7');
+const tx8=AsyncStorage.getItem('tx8');
+const tx9=AsyncStorage.getItem('tx9');
+
+const handleSaveButtonPress = () => {
+  //saveData();
+  navigation.navigate("SaveAccount");
+};
+
 
 return (
   <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -285,8 +182,12 @@ return (
     </View>
     <View style={styles.buttonContainer}>
       <View style={styles.buttonTop}>
-        <Button title='Save' onPress={() => navigation.navigate("SaveAccount")} color="#841FFF" />
-      </View>
+      <Button
+            title='Save'
+            onPress={handleSaveButtonPress}
+            color='#841FFF'
+          />
+       </View>
     </View>
   </ScrollView>
 );
@@ -300,22 +201,57 @@ function SaveAccount({ navigation }) {
 
   const handleSaveButtonPress = () => {
     doi(title, aname, username, pass);
+    navigation.navigate("CreateAccount");
 
     setTitle('');
     setAname('');
     setUsername('');
     setPass('');
   };
+
   function doi(tit, name, user, password) {
-   
-    const data={tit,name,user,password};
-    AsyncStorage.setItem("the_pass_details",JSON.stringify(data));
+    if (tx1 == '') {
+      AsyncStorage.setItem('tx1', JSON.stringify(tit + '\n' + name + '\n' + user + '\n' + password));
+    } else if (tx2 == '') {
+      AsyncStorage.setItem('tx2', JSON.stringify(tit + '\n' + name + '\n' + user + '\n' + password));
+    } else if (tx3 == '') {
+      AsyncStorage.setItem('tx3', JSON.stringify(tx3));
+    } else if (tx4 == '') {
+      AsyncStorage.setItem('tx4', JSON.stringify(tx4));
+    } else if (tx5 == '') {
+      setTx5(tit + '\n' + name + '\n' + user + '\n' + password);
+      AsyncStorage.setItem('tx5', JSON.stringify(tx5));
+    } else if (tx6 == '') {
+      setTx6(tit + '\n' + name + '\n' + user + '\n' + password);
+      AsyncStorage.setItem('tx6', JSON.stringify(tx6));
+    } else if (tx7 == '') {
+      setTx7(tit + '\n' + name + '\n' + user + '\n' + password);
+      AsyncStorage.setItem('tx7', JSON.stringify(tx7));
+    } else if (tx8 == '') {
+      setTx8(tit + '\n' + name + '\n' + user + '\n' + password);
+      AsyncStorage.setItem('tx8', JSON.stringify(tx8));
+    } else if (tx9 == '') {
+      setTx9(tit + '\n' + name + '\n' + user + '\n' + password);
+      AsyncStorage.setItem('tx9', JSON.stringify(tx9));
+    }
   }
 
+  const [tx1, setTx1] = useState('');
+  const [tx2, setTx2] = useState('');
+  const [tx3, setTx3] = useState('');
+  const [tx4, setTx4] = useState('');
+  const [tx5, setTx5] = useState('');
+  const [tx6, setTx6] = useState('');
+  const [tx7, setTx7] = useState('');
+  const [tx8, setTx8] = useState('');
+  const [tx9, setTx9] = useState('');
+
+  console.log(tx1);
+ // console.log(tx2);
+  //console.log(tx3);
+
   return (
-    <KeyboardAvoidingView
-     
-    style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
         Enter account details
       </Text>
@@ -324,7 +260,7 @@ function SaveAccount({ navigation }) {
           placeholder=' title... '
           style={styles.textInput}
           value={title}
-          onChangeText={setTitle} 
+          onChangeText={setTitle}
         />
       </View>
       <View style={styles.bottom1}>
@@ -332,7 +268,7 @@ function SaveAccount({ navigation }) {
           placeholder=' account name... '
           style={styles.textInput}
           value={aname}
-          onChangeText={setAname} 
+          onChangeText={setAname}
         />
       </View>
       <View style={styles.bottom1}>
@@ -340,7 +276,7 @@ function SaveAccount({ navigation }) {
           placeholder=' username... '
           style={styles.textInput}
           value={username}
-          onChangeText={setUsername} 
+          onChangeText={setUsername}
         />
       </View>
       <View style={styles.bottom1}>
@@ -348,15 +284,16 @@ function SaveAccount({ navigation }) {
           placeholder=' password... '
           style={styles.textInput}
           value={pass}
-          onChangeText={setPass} 
+          onChangeText={setPass}
         />
       </View>
       <View style={styles.buttonTop}>
-        <Button title='Save' onPress={handleSaveButtonPress} color="#841FFF" />
+        <Button title='Save' onPress={handleSaveButtonPress} color='#841FFF' />
       </View>
     </KeyboardAvoidingView>
   );
-};
+}
+
 
 
 function ChangeMaster({ navigation}) {
