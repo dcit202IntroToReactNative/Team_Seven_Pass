@@ -9,25 +9,24 @@ import { Picker } from '@react-native-picker/picker';
 function Master({ navigation }) {
   const [masterPass, setMasterPass] = useState('');
   const [confirmMasterPass, setConfirmMasterPass] = useState('');
-  
 
   const handleSaveAndContinue = () => {
-    if (masterPass=== '' || confirmMasterPass=== '') {
+    if (masterPass === '' || confirmMasterPass === '') {
       Alert.alert('Make sure you set a master password');
     } else if (masterPass !== confirmMasterPass) {
       Alert.alert('Wrong Password', 'The passwords do not match. Please try again.');
     } else {
       navigation.navigate('Login');
-      AsyncStorage.setItem("maspass",JSON.stringify(masterPass));
-    console.log(masterPass);
+      AsyncStorage.setItem("maspass", JSON.stringify(masterPass));
+      console.log(masterPass);
     }
   };
 
   return (
     <KeyboardAvoidingView
-     style={styles.container}
-     behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Choose the behavior based on the platform
-     >
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Choose the behavior based on the platform
+    >
       <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Create a Master Pass!</Text>
       <View style={styles.top}>
         <TextInput
@@ -44,7 +43,7 @@ function Master({ navigation }) {
           style={styles.textInput}
           secureTextEntry={true}
           value={confirmMasterPass}
-          onChangeText={text => setConfirmMasterPass(text)}
+          onChangeText={setConfirmMasterPass}
         />
       </View>
       <View style={styles.button}>
@@ -68,31 +67,27 @@ function Login({ navigation }) {
         console.error(error);
       }
     };
-  
+
     getPassword();
   }, []);
-  
 
-    
   const handleSaveButtonPress = () => {
     verify(passo);
     setPasso('');
   };
 
   function verify(passo) {
-    if (pass == '"'+passo+'"') {
+    if (pass === '"' + passo + '"') {
       navigation.navigate('CreateAccount');
     } else {
       ToastAndroid.show('Get Away, you brute!', ToastAndroid.LONG);
       console.log(typeof(passo));
       console.log(typeof(pass));
-      console.log('"'+passo+'"');
+      console.log('"' + passo + '"');
       console.log(pass);
-      console.log(pass == passo);
+      console.log(pass === passo);
     }
   }
-  
-  
 
   return (
     <View style={styles.container}>
@@ -102,7 +97,7 @@ function Login({ navigation }) {
           placeholder='Enter your Master Pass!'
           style={styles.textInput}
           value={passo}
-          onChangeText={(text) => setPasso(text)} 
+          onChangeText={(text) => setPasso(text)}
         />
       </View>
       <View style={styles.buttonTopper}>
@@ -112,78 +107,154 @@ function Login({ navigation }) {
   );
 }
 
+function CreateAccount({ navigation, route }) {
+  const { tx1, tx2, tx3, tx4, tx5, tx6, tx7, tx8, tx9, password } =
+    route.params || {};
+
+  const [title, setTitle] = useState(''); 
+  const [aname, setAname] = useState(''); 
+  const [username, setUsername] = useState(''); 
 
 
-function CreateAccount({ navigation }) {
-const tx1=AsyncStorage.getItem("tx1");
-const tx2=AsyncStorage.getItem('tx2');
-const tx3=AsyncStorage.getItem('tx3');
-const tx4=AsyncStorage.getItem('tx4');
-const tx5=AsyncStorage.getItem('tx5');
-const tx6=AsyncStorage.getItem('tx6');
-const tx7=AsyncStorage.getItem('tx7');
-const tx8=AsyncStorage.getItem('tx8');
-const tx9=AsyncStorage.getItem('tx9');
-console.log(tx1);
+  const [stateTx1, setStateTx1] = useState('');
+  const [stateTx2, setStateTx2] = useState('');
+  const [stateTx3, setStateTx3] = useState('');
+  const [stateTx4, setStateTx4] = useState('');
+  const [stateTx5, setStateTx5] = useState('');
+  const [stateTx6, setStateTx6] = useState('');
+  const [stateTx7, setStateTx7] = useState('');
+  const [stateTx8, setStateTx8] = useState('');
+  const [stateTx9, setStateTx9] = useState('');
+  const [statePassword, setStatePassword] = useState('');
 
-const handleSaveButtonPress = () => {
-  //saveData();
-  navigation.pop();
-  navigation.navigate("SaveAccount");
-};
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const storedTx1 = await AsyncStorage.getItem('tx1');
+        setStateTx1(storedTx1 || '');
+        const storedTx2 = await AsyncStorage.getItem('tx2');
+        setStateTx2(storedTx2 || '');
+        const storedTx3 = await AsyncStorage.getItem('tx3');
+        setStateTx3(storedTx3 || '');
+        const storedTx4 = await AsyncStorage.getItem('tx4');
+        setStateTx4(storedTx4 || '');
+        const storedTx5 = await AsyncStorage.getItem('tx5');
+        setStateTx5(storedTx5 || '');
+        const storedTx6 = await AsyncStorage.getItem('tx6');
+        setStateTx6(storedTx6 || '');
+        const storedTx7 = await AsyncStorage.getItem('tx7');
+        setStateTx7(storedTx7 || '');
+        const storedTx8 = await AsyncStorage.getItem('tx8');
+        setStateTx8(storedTx8 || '');
+        const storedTx9 = await AsyncStorage.getItem('tx9');
+        setStateTx9(storedTx9 || '');
+        setStatePassword(password || ''); // Set the state for the password
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    getData();
+  }, [password]);
 
-return (
-  <ScrollView contentContainerStyle={styles.scrollViewContent}>
-    <View style={styles.textContainer}>
-      <TextInput
-        style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', width: 400 }}
-        value={tx1}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx2}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx3}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx4}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx5}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx6}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx7}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx8}
-      />
-      <TextInput
-        style={styles.textInputCA}
-        value={tx9}
-      />
-    </View>
-    <View style={styles.buttonContainer}>
-      <View style={styles.buttonTop}>
-      <Button
+  const handleSaveButtonPress = () => {
+    saveAccountDetails(title, aname, username, statePassword); // Use the statePassword variable
+    navigation.pop();
+    navigation.navigate('SaveAccount');
+  };
+
+  // Function to save account details to AsyncStorage
+  const saveAccountDetails = (tit, name, user, password) => {
+    if (stateTx1 === '') {
+      AsyncStorage.setItem('tx1', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx1(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx2 === '') {
+      AsyncStorage.setItem('tx2', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx2(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx3 === '') {
+      AsyncStorage.setItem('tx3', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx3(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx4 === '') {
+      AsyncStorage.setItem('tx4', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx4(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx5 === '') {
+      AsyncStorage.setItem('tx5', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx5(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx6 === '') {
+      AsyncStorage.setItem('tx6', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx6(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx7 === '') {
+      AsyncStorage.setItem('tx7', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx7(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx8 === '') {
+      AsyncStorage.setItem('tx8', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx8(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (stateTx9 === '') {
+      AsyncStorage.setItem('tx9', `${tit}\n${name}\n${user}\n${password}`);
+      setStateTx9(`${tit}\n${name}\n${user}\n${password}`);
+    }
+  };
+
+  return (
+    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <View style={styles.textContainer}>
+        <TextInput
+          style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', width: 400 }}
+          value={stateTx1}
+          onChangeText={setStateTx1}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx2}
+          onChangeText={setStateTx2}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx3}
+          onChangeText={setStateTx3}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx4}
+          onChangeText={setStateTx4}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx5}
+          onChangeText={setStateTx5}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx6}
+          onChangeText={setStateTx6}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx7}
+          onChangeText={setStateTx7}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx8}
+          onChangeText={setStateTx8}
+        />
+        <TextInput
+          style={styles.textInputCA}
+          value={stateTx9}
+          onChangeText={setStateTx9}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <View style={styles.buttonTop}>
+          <Button
             title='Save'
             onPress={handleSaveButtonPress}
             color='#841FFF'
           />
-       </View>
-    </View>
-  </ScrollView>
-);
+        </View>
+      </View>
+    </ScrollView>
+  );
 }
 
 function SaveAccount({ navigation }) {
@@ -192,9 +263,59 @@ function SaveAccount({ navigation }) {
   const [username, setUsername] = useState('');
   const [pass, setPass] = useState('');
 
+  const [tx1, setTx1] = useState('');
+  const [tx2, setTx2] = useState('');
+  const [tx3, setTx3] = useState('');
+  const [tx4, setTx4] = useState('');
+  const [tx5, setTx5] = useState('');
+  const [tx6, setTx6] = useState('');
+  const [tx7, setTx7] = useState('');
+  const [tx8, setTx8] = useState('');
+  const [tx9, setTx9] = useState('');
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const storedTx1 = await AsyncStorage.getItem('tx1');
+        setTx1(storedTx1 || '');
+        const storedTx2 = await AsyncStorage.getItem('tx2');
+        setTx2(storedTx2 || '');
+        const storedTx3 = await AsyncStorage.getItem('tx3');
+        setTx3(storedTx3 || '');
+        const storedTx4 = await AsyncStorage.getItem('tx4');
+        setTx4(storedTx4 || '');
+        const storedTx5 = await AsyncStorage.getItem('tx5');
+        setTx5(storedTx5 || '');
+        const storedTx6 = await AsyncStorage.getItem('tx6');
+        setTx6(storedTx6 || '');
+        const storedTx7 = await AsyncStorage.getItem('tx7');
+        setTx7(storedTx7 || '');
+        const storedTx8 = await AsyncStorage.getItem('tx8');
+        setTx8(storedTx8 || '');
+        const storedTx9 = await AsyncStorage.getItem('tx9');
+        setTx9(storedTx9 || '');
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getData();
+  }, []);
+
   const handleSaveButtonPress = () => {
-    doi(title, aname, username, pass);
-    navigation.navigate("CreateAccount");
+    saveAccountDetails(title, aname, username, pass);
+    navigation.navigate('CreateAccount', {
+      tx1, // Pass the saved details as route parameters
+      tx2,
+      tx3,
+      tx4,
+      tx5,
+      tx6,
+      tx7,
+      tx8,
+      tx9,
+      password: pass, // Pass the password as a parameter
+    });
 
     setTitle('');
     setAname('');
@@ -202,45 +323,37 @@ function SaveAccount({ navigation }) {
     setPass('');
   };
 
-  function doi(tit, name, user, password) {
-    if (tx1 == '') {
-      AsyncStorage.setItem('tx1', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx2 == '') {
-      AsyncStorage.setItem('tx2', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx3 == '') {
-      AsyncStorage.setItem('tx3', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx4 == '') {
-      AsyncStorage.setItem('tx4', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx5 == '') {
-      setTx5(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx5', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx6 == '') {
-      setTx6(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx6', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx7 == '') {
-      setTx7(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx7', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx8 == '') {
-      setTx8(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx8', (tit + '\n' + name + '\n' + user + '\n' + password));
-    } else if (tx9 == '') {
-      setTx9(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx9', (tit + '\n' + name + '\n' + user + '\n' + password));
+  // Function to save account details to AsyncStorage
+  const saveAccountDetails = (tit, name, user, password) => {
+    if (tx1 === '') {
+      AsyncStorage.setItem('tx1', `${tit}\n${name}\n${user}\n${password}`);
+      setTx1(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx2 === '') {
+      AsyncStorage.setItem('tx2', `${tit}\n${name}\n${user}\n${password}`);
+      setTx2(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx3 === '') {
+      AsyncStorage.setItem('tx3', `${tit}\n${name}\n${user}\n${password}`);
+      setTx3(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx4 === '') {
+      AsyncStorage.setItem('tx4', `${tit}\n${name}\n${user}\n${password}`);
+      setTx4(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx5 === '') {
+      AsyncStorage.setItem('tx5', `${tit}\n${name}\n${user}\n${password}`);
+      setTx5(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx6 === '') {
+      AsyncStorage.setItem('tx6', `${tit}\n${name}\n${user}\n${password}`);
+      setTx6(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx7 === '') {
+      AsyncStorage.setItem('tx7', `${tit}\n${name}\n${user}\n${password}`);
+      setTx7(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx8 === '') {
+      AsyncStorage.setItem('tx8', `${tit}\n${name}\n${user}\n${password}`);
+      setTx8(`${tit}\n${name}\n${user}\n${password}`);
+    } else if (tx9 === '') {
+      AsyncStorage.setItem('tx9', `${tit}\n${name}\n${user}\n${password}`);
+      setTx9(`${tit}\n${name}\n${user}\n${password}`);
     }
-  }
-
-  var tx1=""; 
-  var tx2="";
-  var tx3="";
-  var tx4="";
-  var tx5="";
-  var tx6="";
-  var tx7="";
-  var tx8="";
-  var tx9="";
-
- // console.log(tx2);
-  //console.log(tx3);
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -285,60 +398,6 @@ function SaveAccount({ navigation }) {
     </KeyboardAvoidingView>
   );
 }
-
-
-
-function ChangeMaster({ navigation}) {
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>Change Master Password</Text>
-      <View style={styles.topper}>
-        <TextInput
-          placeholder='new passowrd..'
-          style={styles.textInput}
-        />
-      </View>
-      <View style={styles.topper}>
-        <TextInput
-          placeholder='confirm new passowrd..'
-          style={styles.textInput}
-        />
-      </View>
-      <View style={styles.buttonTop}>
-        <Button title='Save' color="#841FFF" />
-      </View>
-      <View style={styles.buttonTop}>
-        <Button title='Save' onPress = {() => navigation.navigate("Settings")} color="#841FFF" />
-      </View>
-    </View>
-  );
-}
-
-function Settings({ navigation}) {
-  return (
-    <View>
-      <View style={styles.buttonTop}>
-        <Button title='About' onPress = {() => navigation.navigate("About")} color="#841FFF" />
-      </View>
-    </View>
-  );
-}
-
-function About() {
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 50 }}>
-      Team 7-Password Manager App Richard Djirackor (Captain) Adzedowa Courage (Second Captain)
-      This application serves as a Password Manager. It allows users to securely store their passwords and associated details such as usernames and email addresses for future use.
-      Initially this was merely a project work, but now, I will focus on building more revolutionary apps in the future
-      So watch this repository github.com/ rdjirackor, as more is certain to come, God willingly!
-      </Text>
-     
-    </View>
-  );
-}
-
-
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -347,17 +406,16 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Master} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="CreateAccount" component={CreateAccount}/>
+        <Stack.Screen name="CreateAccount" component={CreateAccount} />
         <Stack.Screen name="SaveAccount" component={SaveAccount} />
-        <Stack.Screen name="ChangeMaster" component={ChangeMaster} />
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="About" component={About} />
+        {/* Add other screens here */}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
+
 
 const styles = StyleSheet.create({
   container: {
