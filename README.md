@@ -1,5 +1,5 @@
 # Team_Seven_Pass
-eam Members
+Team Members
 Richard Djirackor (Leader) (GitHub name: rdjirackor) - 10965604
 Adzedowa Courage (GitHub name: BrainyYawson) - 10962382
 Azariah Waadie (GitHub name: waadieazaria) -
