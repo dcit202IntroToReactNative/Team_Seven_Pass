@@ -362,7 +362,7 @@ function SaveAccount({ navigation }) {
       <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
         Enter account details
       </Text>
-      <View style={styles.bottom}>
+      <View style={styles.bottom1}>
         <TextInput
           placeholder=' title... '
           style={styles.textInput}
@@ -370,7 +370,7 @@ function SaveAccount({ navigation }) {
           onChangeText={setTitle} 
         />
       </View>
-      <View style={styles.bottom}>
+      <View style={styles.bottom1}>
         <TextInput
           placeholder=' account name... '
           style={styles.textInput}
@@ -378,7 +378,7 @@ function SaveAccount({ navigation }) {
           onChangeText={setAname} 
         />
       </View>
-      <View style={styles.bottom}>
+      <View style={styles.bottom1}>
         <TextInput
           placeholder=' username... '
           style={styles.textInput}
@@ -386,7 +386,7 @@ function SaveAccount({ navigation }) {
           onChangeText={setUsername} 
         />
       </View>
-      <View style={styles.bottom}>
+      <View style={styles.bottom1}>
         <TextInput
           placeholder=' password... '
           style={styles.textInput}
@@ -541,7 +541,20 @@ const styles = StyleSheet.create({
     borderColor: '#9C27B0',
     borderRadius: 10,
     borderWidth: 5,
-    marginTop: 90,
+    marginTop: 70,
+    marginLeft: 20,
+    marginRight: 20,
+    borderLeftRadius: 20,
+    borderRightRadius: 20,
+    padding: 0,
+  },
+  bottom1: {
+    flex: 0.17,
+    backgroundColor: '#fff',
+    borderColor: '#9C27B0',
+    borderRadius: 10,
+    borderWidth: 5,
+    marginTop: 25,
     marginLeft: 20,
     marginRight: 20,
     borderLeftRadius: 20,
