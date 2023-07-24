@@ -501,9 +501,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginLeft: 20,
     marginRight: 20,
-    borderLeftRadius: 20,
-    borderRightRadius: 20,
-    padding: 0,
+    padding: 8,
   },
   floatingButton: {
     flex:1,
