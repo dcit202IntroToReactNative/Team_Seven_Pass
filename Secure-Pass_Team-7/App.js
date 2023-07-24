@@ -234,96 +234,53 @@ const [tx7, setTx7] = useState('');
 const [tx8, setTx8] = useState('');
 const [tx9, setTx9] = useState('');
 
-const handleButtonPress = () => {
-  ToastAndroid.show('HeyClickMe!', ToastAndroid.SHORT);
-};
-
-const [selectedValue, setSelectedValue] = useState('option1');
-
-const handleSpinnerSelection = (selectedItem) => {
-  setSelectedValue(selectedItem);
-  switch (selectedItem) {
-    case 'Change Master Password':
-      // Implement the action for 'Change Master Password'
-      break;
-    case 'Settings':
-      // Implement the action for 'Settings'
-      break;
-    case 'Exit':
-      // Implement the action for 'Exit'
-      break;
-    default:
-      break;
-  }
-};
-
 return (
   <ScrollView contentContainerStyle={styles.scrollViewContent}>
-    <View style={styles.pickerContainer}>
-      {/* Add the Picker component */}
-      <Picker
-        selectedValue={selectedValue}
-        onValueChange={(itemValue) => handleSpinnerSelection(itemValue)}
-      >
-        <Picker.Item label="Change Master Password" value="Change Master Password" />
-        <Picker.Item label="Settings" value="Settings" />
-        <Picker.Item label="Exit" value="Exit" />
-      </Picker>
-    </View>
     <View style={styles.textContainer}>
       <TextInput
         style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', width: 400 }}
         onChangeText={(text) => setTx1(text)}
         value={tx1}
-        placeholder="Text Input 1"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx2(text)}
         value={tx2}
-        placeholder="Text Input 2"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx3(text)}
         value={tx3}
-        placeholder="Text Input 3"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx4(text)}
         value={tx4}
-        placeholder="Text Input 4"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx5(text)}
         value={tx5}
-        placeholder="Text Input 5"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx6(text)}
         value={tx6}
-        placeholder="Text Input 6"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx7(text)}
         value={tx7}
-        placeholder="Text Input 7"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx8(text)}
         value={tx8}
-        placeholder="Text Input 8"
       />
       <TextInput
         style={styles.textInputCA}
         onChangeText={(text) => setTx9(text)}
         value={tx9}
-        placeholder="Text Input 9"
       />
     </View>
     <View style={styles.buttonContainer}>
@@ -504,10 +461,10 @@ const styles = StyleSheet.create({
   buttonTop: {
     height: 40,
     width: 100,
-    marginLeft: 200,
-    marginTop: 50,
+    marginLeft: 250,
+    marginTop: 15,
     borderRadius: 40,
-    marginBottom:50,
+    marginBottom:140,
   },
   textInput: {
     flex: 1,
