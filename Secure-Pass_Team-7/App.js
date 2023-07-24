@@ -101,7 +101,7 @@ function Login({ navigation }) {
         />
       </View>
       <View style={styles.buttonTopper}>
-        <Button title='HeyClickMe!' onPress={handleSaveButtonPress} color='#841FFF' />
+        <Button title='Continue!' onPress={handleSaveButtonPress} color='#841FFF' />
       </View>
     </View>
   );
@@ -247,7 +247,7 @@ function CreateAccount({ navigation, route }) {
       <View style={styles.buttonContainer}>
         <View style={styles.buttonTop}>
           <Button
-            title='Save'
+            title='Add New!'
             onPress={handleSaveButtonPress}
             color='#841FFF'
           />
