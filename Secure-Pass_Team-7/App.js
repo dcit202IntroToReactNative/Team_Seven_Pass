@@ -124,9 +124,11 @@ const tx6=AsyncStorage.getItem('tx6');
 const tx7=AsyncStorage.getItem('tx7');
 const tx8=AsyncStorage.getItem('tx8');
 const tx9=AsyncStorage.getItem('tx9');
+console.log(tx1);
 
 const handleSaveButtonPress = () => {
   //saveData();
+  navigation.pop();
   navigation.navigate("SaveAccount");
 };
 
@@ -136,47 +138,38 @@ return (
     <View style={styles.textContainer}>
       <TextInput
         style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', width: 400 }}
-        onChangeText={(text) => setTx1(text)}
         value={tx1}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx2(text)}
         value={tx2}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx3(text)}
         value={tx3}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx4(text)}
         value={tx4}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx5(text)}
         value={tx5}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx6(text)}
         value={tx6}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx7(text)}
         value={tx7}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx8(text)}
         value={tx8}
       />
       <TextInput
         style={styles.textInputCA}
-        onChangeText={(text) => setTx9(text)}
         value={tx9}
       />
     </View>
@@ -211,42 +204,41 @@ function SaveAccount({ navigation }) {
 
   function doi(tit, name, user, password) {
     if (tx1 == '') {
-      AsyncStorage.setItem('tx1', JSON.stringify(tit + '\n' + name + '\n' + user + '\n' + password));
+      AsyncStorage.setItem('tx1', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx2 == '') {
-      AsyncStorage.setItem('tx2', JSON.stringify(tit + '\n' + name + '\n' + user + '\n' + password));
+      AsyncStorage.setItem('tx2', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx3 == '') {
-      AsyncStorage.setItem('tx3', JSON.stringify(tx3));
+      AsyncStorage.setItem('tx3', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx4 == '') {
-      AsyncStorage.setItem('tx4', JSON.stringify(tx4));
+      AsyncStorage.setItem('tx4', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx5 == '') {
       setTx5(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx5', JSON.stringify(tx5));
+      AsyncStorage.setItem('tx5', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx6 == '') {
       setTx6(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx6', JSON.stringify(tx6));
+      AsyncStorage.setItem('tx6', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx7 == '') {
       setTx7(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx7', JSON.stringify(tx7));
+      AsyncStorage.setItem('tx7', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx8 == '') {
       setTx8(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx8', JSON.stringify(tx8));
+      AsyncStorage.setItem('tx8', (tit + '\n' + name + '\n' + user + '\n' + password));
     } else if (tx9 == '') {
       setTx9(tit + '\n' + name + '\n' + user + '\n' + password);
-      AsyncStorage.setItem('tx9', JSON.stringify(tx9));
+      AsyncStorage.setItem('tx9', (tit + '\n' + name + '\n' + user + '\n' + password));
     }
   }
 
-  const [tx1, setTx1] = useState('');
-  const [tx2, setTx2] = useState('');
-  const [tx3, setTx3] = useState('');
-  const [tx4, setTx4] = useState('');
-  const [tx5, setTx5] = useState('');
-  const [tx6, setTx6] = useState('');
-  const [tx7, setTx7] = useState('');
-  const [tx8, setTx8] = useState('');
-  const [tx9, setTx9] = useState('');
+  var tx1=""; 
+  var tx2="";
+  var tx3="";
+  var tx4="";
+  var tx5="";
+  var tx6="";
+  var tx7="";
+  var tx8="";
+  var tx9="";
 
-  console.log(tx1);
  // console.log(tx2);
   //console.log(tx3);
 
