@@ -159,7 +159,6 @@ function CreateAccount({ navigation, route }) {
 
   const handleSaveButtonPress = () => {
     saveAccountDetails(title, aname, username, statePassword); // Use the statePassword variable
-    navigation.pop();
     navigation.navigate('SaveAccount');
   };
 
