@@ -9,18 +9,19 @@ import { Picker } from '@react-native-picker/picker';
 function Master({ navigation }) {
   const [masterPass, setMasterPass] = useState('');
   const [confirmMasterPass, setConfirmMasterPass] = useState('');
+  
 
   const handleSaveAndContinue = () => {
-    if (masterPass !== confirmMasterPass) {
+    if (masterPass=== '' || confirmMasterPass=== '') {
+      Alert.alert('Make sure you set a master password');
+    } else if (masterPass !== confirmMasterPass) {
       Alert.alert('Wrong Password', 'The passwords do not match. Please try again.');
     } else {
-      // Passwords match, continue to the next screen (Login)
       navigation.navigate('Login');
       AsyncStorage.setItem("maspass",JSON.stringify(masterPass));
     console.log(masterPass);
     }
   };
-
 
   return (
     <KeyboardAvoidingView
